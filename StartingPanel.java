@@ -19,7 +19,8 @@ public class StartingPanel extends AppPanel{
                                        "aluminium can","aluminium foil",
                                        "charger broken",
                                        "plastic bottle",
-                                       "potato peel"};
+                                       "potato peel",
+                                       "jeans"};
 
     public StartingPanel(){
         setLayout(new BorderLayout());
@@ -30,12 +31,12 @@ public class StartingPanel extends AppPanel{
 
     private void createTopPanel(){
         JPanel topPanel = new JPanel();
-        topPanel.setBackground(new Color(126,217,87));
+        topPanel.setBackground(appColour);
         topPanel.setLayout(new BorderLayout());
         JButton personalDataButton = new JButton(getImage("Settings.png"));
         personalDataButton.setPreferredSize(new Dimension(100,100 ));
         personalDataButton.setFont(textFont);
-        personalDataButton.setBackground(new Color(126,217,87));
+        personalDataButton.setBackground(appColour);
         personalDataButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -52,7 +53,7 @@ public class StartingPanel extends AppPanel{
         JButton homeButton = new JButton(getImage("Home.png"));
         homeButton.setPreferredSize(new Dimension(100,100));
         homeButton.setFont(textFont);
-        homeButton.setBackground(new Color(126,217,87));
+        homeButton.setBackground(appColour);
         homeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -78,7 +79,7 @@ public class StartingPanel extends AppPanel{
 
     private void createBotPanel(){
         JPanel botPanel = new JPanel();
-        botPanel.setBackground(new Color(126,217,87));
+        botPanel.setBackground(appColour);
         botPanel.setPreferredSize(new Dimension(500, 150));
         GridBagLayout gridBag = new GridBagLayout();
         botPanel.setLayout(gridBag);
@@ -88,7 +89,7 @@ public class StartingPanel extends AppPanel{
         botSearchLabel.setPreferredSize(new Dimension(100,50 ));
         botSearchLabel.setFont(textFont);
         botSearchLabel.setOpaque(true);
-        botSearchLabel.setBackground(new Color(126,217,87));
+        botSearchLabel.setBackground(appColour);
         changeConstraintPosition(constraint, 0, 0);
         addToPane(botSearchLabel,constraint,gridBag,botPanel);
 

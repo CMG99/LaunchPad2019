@@ -34,24 +34,13 @@ public class HomePanel extends AppPanel{
         changeConstraintPadding(constraint, 2,2 );
         changeConstraintPadding(constraint2, 2,2 );
 
-        for(int i=0;i<homePageDetails.length;i++){
-            if(i==0){
-                createDropDown(homePageDetails[i][0], homePageDetails[i][1], i, 0, 0, constraint2,gridBag2 );
-            }
-            else if(i==1){
-                createDropDown(homePageDetails[i][0], homePageDetails[i][1], i, 1, 0, constraint2,gridBag2 );
-            }
-            else if(i==2){
-                createDropDown(homePageDetails[i][0], homePageDetails[i][1], i, 0, 1, constraint2,gridBag2 );
-            }
-            else {
-                createDropDown(homePageDetails[i][0], homePageDetails[i][1], i, 1, 1, constraint2,gridBag2 );
-            }
-        }
+        JPanel topPanel = new JPanel();
+        topPanel.setPreferredSize(new Dimension(500,100));
+        topPanel.setBackground(appColour);
+        topPanel.setLayout(new BorderLayout());
 
-
-        JButton backButton = new JButton("Back");
-        backButton.setPreferredSize(new Dimension(100,30 ));
+        JButton backButton = new JButton(getImage("leftBackButton.png"));
+        backButton.setPreferredSize(new Dimension(100,100 ));
         backButton.setFont(textFont);
         backButton.addActionListener(new ActionListener() {
             @Override
@@ -60,24 +49,71 @@ public class HomePanel extends AppPanel{
                 SwingUtilities.updateComponentTreeUI(MasterFrame.masterFrame);
             }
         });
-        changeConstraintPosition(constraint, 0, 0);
-        addToPane(backButton, constraint, gridBag, this);
+        topPanel.add(backButton,BorderLayout.WEST);
 
 
-        JLabel titleLabel = new JLabel("WTF is this app ?");
-        titleLabel.setPreferredSize(new Dimension(400,50));
+        JLabel titleLabel = new JLabel(getImage("LazyRecycleLogo.png"));
+        titleLabel.setPreferredSize(new Dimension(100,100));
         titleLabel.setFont(headingTextFont);
+        topPanel.add(titleLabel,BorderLayout.CENTER);
 
-        changeConstraintPosition(constraint, 1, 0);
-        addToPane(titleLabel, constraint, gridBag, this);
+        JButton shopButton = new JButton(getImage("shoppingBasket.png"));
+        shopButton.setPreferredSize(new Dimension(100,100 ));
+        shopButton.setFont(textFont);
+        shopButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MasterFrame.changePanel("StartingPanel");
+                SwingUtilities.updateComponentTreeUI(MasterFrame.masterFrame);
+            }
+        });
+        topPanel.add(shopButton,BorderLayout.EAST);
+
+        changeConstraintPosition(constraint, 0, 0);
+        addToPane(topPanel, constraint, gridBag, this);
+
+        JPanel midPanel = new JPanel();
+        midPanel.setPreferredSize(new Dimension(500,150 ));
+        GridBagLayout gridBag3 = new GridBagLayout();
+        GridBagConstraints constraint3 = new GridBagConstraints();
+        midPanel.setLayout(gridBag3);
+
+        JLabel wtfLabel = new JLabel("WTF is this App?");
+        wtfLabel.setFont(headingTextFont);
+        changeConstraintPadding(constraint3, 50, 0);
+        changeConstraintPosition(constraint3, 0, 0);
+        addToPane(wtfLabel, constraint3, gridBag3, midPanel);
+
+        JLabel descriptionLabel = new JLabel("<html><Recycling. The issue of out generation.<br>"+
+                "Join our effort to minimise waste in the four<br>"+
+                "following ways. Don't be lazy...</html>");
+        descriptionLabel.setFont(textFont);
+        changeConstraintPosition(constraint3, 0, 1);
+        addToPane(descriptionLabel, constraint3, gridBag3, midPanel);
 
         changeConstraintPosition(constraint, 0, 1);
-        changeConstraintGridSpan(constraint,0,-1 );
+        addToPane(midPanel, constraint, gridBag, this);
+
+        for(int i=0;i<homePageDetails.length;i++){
+            if(i==0){
+                createDropDown(homePageDetails[i][0], homePageDetails[i][1], i, 0, 0, constraint2,gridBag2);
+            }
+            else if(i==1){
+                createDropDown(homePageDetails[i][0], homePageDetails[i][1], i, 1, 0, constraint2,gridBag2);
+            }
+            else if(i==2){
+                createDropDown(homePageDetails[i][0], homePageDetails[i][1], i, 0, 1, constraint2,gridBag2);
+            }
+            else {
+                createDropDown(homePageDetails[i][0], homePageDetails[i][1], i, 1, 1, constraint2,gridBag2);
+            }
+        }
+
+        changeConstraintPosition(constraint, 0, 2);
         addToPane(dropDownPanelMaster, constraint, gridBag, this);
 
-
         JLabel image = new JLabel(getImage("SocialMedias.png"));
-        changeConstraintPosition(constraint, 0, 2);
+        changeConstraintPosition(constraint, 0, 3);
         addToPane(image, constraint, gridBag, this);
 
 
@@ -89,9 +125,10 @@ public class HomePanel extends AppPanel{
         dropDownPanel.setLayout(gridBag);
         GridBagConstraints constraint = new GridBagConstraints();
         JLabel dropDownName = new JLabel(name);
-        dropDownName.setFont(textFont);
-        dropDownName.setBackground(new Color(50,50,50));
-        dropDownName.setPreferredSize(new Dimension(200,30));
+        dropDownName.setBackground(appColour);
+        dropDownName.setOpaque(true);
+        dropDownName.setFont(headingTextFont);
+        dropDownName.setPreferredSize(new Dimension(200,50));
         dropDownName.setBorder(border);
         changeConstraintPosition(constraint, 0, 0);
         addToPane(dropDownName, constraint, gridBag, dropDownPanel);

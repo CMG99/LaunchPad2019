@@ -12,7 +12,9 @@ public class AppPanel extends JPanel {
     protected Font textFont = new Font("Arial",Font.PLAIN,20);
     protected Font headingTextFont = new Font("Arial",Font.PLAIN,45);
     protected Border border = BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1);
-
+    protected Border emptyBorder = BorderFactory.createEmptyBorder(20, 20, 20, 20);
+    protected Color appColour = new Color(126,217,87);
+    protected Color whiteColour = new Color(255,255,255);
 
     protected String imagePath = System.getProperty("user.dir")+"\\images";
     static protected String productInfoPath = System.getProperty("user.dir")+"\\ProductInformations";
@@ -30,10 +32,10 @@ public class AppPanel extends JPanel {
         return 0;
     }
 
-    protected void changeConstraintPosition(GridBagConstraints constraint, int posX, int posY){
+    protected void changeConstraintPosition(GridBagConstraints constraint, int column, int row){
         constraint.fill = GridBagConstraints.HORIZONTAL;
-        constraint.gridx = posX;
-        constraint.gridy = posY;
+        constraint.gridx = column;
+        constraint.gridy = row;
     }
 
     protected void changeConstraintPadding(GridBagConstraints constraint, int paddingX, int paddingY){
@@ -90,7 +92,6 @@ public class AppPanel extends JPanel {
             return new ImageIcon(ImageIO.read(new File(imagePath+"\\"+name)));
         }
         catch (IOException ex) {
-            System.out.println("###############################error");
             try {
                 new ImageIcon(ImageIO.read(new File(imagePath + "\\ImageNotFound.png")));
             }

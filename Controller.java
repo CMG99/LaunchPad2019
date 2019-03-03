@@ -10,7 +10,7 @@ public class Controller {
                     UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
                 }
                 catch (Exception e){System.out.println("failed");}
-                JFrame masterFrame = new JFrame("LaunchPad");
+                JFrame masterFrame = new JFrame("LazyRecycle");
                 masterFrame.setSize(550,700);
                 masterFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 masterFrame.setVisible(true);

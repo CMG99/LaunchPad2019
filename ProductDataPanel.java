@@ -22,12 +22,14 @@ public class ProductDataPanel extends AppPanel {
                                                                  "Donate",getContents("charger-broken.txt", "Donate")},
                                          {2,"plasticBottle.jpg","Recycle",getContents("plasticBottle.txt","Recycle"),
                                                                 "DIY",getContents("plasticBottle.txt", "DIY")},
-                                         {3,"Potato-peel.jpg","Recycle",getContents("potato-peel.txt","Recycle"),
-                                                              "Recipe",getContents("potato-peel.txt", "Recipe"),
-                                                              "Compost",getContents("potato-peel.txt", "Compost")}};
+                                         {2,"Potato-peel.jpg","Recycle",getContents("potato-peel.txt","Recycle"),
+                                                              "Recipe",getContents("potato-peel.txt", "Recipe")},
+                                         {3,"Trousers.jpg","Recycle",getContents("jeans.txt","Recycle"),
+                                                           "Donate",getContents("jeans.txt", "Donate"),
+                                                           "Fix",getContents("jeans.txt", "Fix")}};
     private Object[] currentDetails;
     private ArrayList<Boolean> dropDownStates = new ArrayList<>();
-    private String[] productDetailsString = {"tomato carton","charger broken","plastic bottle","potato peel"};
+    private String[] productDetailsString = {"tomato carton","charger broken","plastic bottle","potato peel","jeans"};
     private JPanel dropDownPanelMaster = new JPanel();
     private boolean hasHyperlink = false;
     private String hyperlink;
@@ -46,8 +48,13 @@ public class ProductDataPanel extends AppPanel {
         changeConstraintPadding(constraint, 2,2 );
         changeConstraintPadding(constraint2, 2,2 );
 
-        JButton backButton = new JButton("Back");
-        backButton.setPreferredSize(new Dimension(100,30 ));
+        JPanel topPanel = new JPanel();
+        topPanel.setPreferredSize(new Dimension(500,100));
+        topPanel.setBackground(appColour);
+        topPanel.setLayout(new BorderLayout());
+
+        JButton backButton = new JButton(getImage("leftBackButton.png"));
+        backButton.setPreferredSize(new Dimension(100,100));
         backButton.setFont(textFont);
         backButton.addActionListener(new ActionListener() {
             @Override
@@ -56,18 +63,35 @@ public class ProductDataPanel extends AppPanel {
                 SwingUtilities.updateComponentTreeUI(MasterFrame.masterFrame);
             }
         });
+        topPanel.add(backButton,BorderLayout.WEST);
+
+        JLabel logoLabel = new JLabel(getImage("LazyRecycleLogo.png"));
+        logoLabel.setPreferredSize(new Dimension(400,50));
+        logoLabel.setFont(headingTextFont);
+        topPanel.add(logoLabel,BorderLayout.CENTER);
+
         changeConstraintPosition(constraint, 0, 0);
-        addToPane(backButton, constraint, gridBag, this);
+        addToPane(topPanel, constraint, gridBag, this);
+
+
+        JPanel productPanel = new JPanel();
+        productPanel.setLayout(new BorderLayout());
+        productPanel.setPreferredSize(new Dimension(500, 50));
 
         JLabel productLabel = new JLabel(product);
-        productLabel.setPreferredSize(new Dimension(400,50));
         productLabel.setFont(headingTextFont);
-        changeConstraintPosition(constraint, 0, 0);
-        addToPane(productLabel, constraint, gridBag, this);
+
+        JLabel productIdentifierLabel = new JLabel("Product: ");
+        productIdentifierLabel.setFont(headingTextFont);
+
+        productPanel.add(productIdentifierLabel,BorderLayout.WEST);
+        productPanel.add(productLabel,BorderLayout.EAST);
+
+        changeConstraintPosition(constraint, 0, 1);
+        addToPane(productPanel, constraint, gridBag, this);
 
         JLabel image = new JLabel(getImage((String)currentDetails[1]));
-        changeConstraintPosition(constraint, 0, 1);
-        changeConstraintGridSpan(constraint,2 ,-1 );
+        changeConstraintPosition(constraint, 0, 2);
         addToPane(image, constraint, gridBag, this);
 
         for(int i=0;i<(int) currentDetails[0];i++){
@@ -77,7 +101,7 @@ public class ProductDataPanel extends AppPanel {
             createDropDown((String) productDetails[index][2*(i+1)], (String) productDetails[index][2*(i+1)+1], i,constraint2,gridBag2);
         }
 
-        changeConstraintPosition(constraint, 0, 2);
+        changeConstraintPosition(constraint, 0, 3);
         addToPane(dropDownPanelMaster, constraint, gridBag, this);
     }
 
@@ -88,18 +112,23 @@ public class ProductDataPanel extends AppPanel {
         GridBagConstraints constraint = new GridBagConstraints();
         JLabel dropDownName = new JLabel(name);
         dropDownName.setFont(textFont);
-        dropDownName.setBackground(new Color(50,50,50));
+        dropDownName.setBackground(appColour);
+        dropDownName.setOpaque(true);
         dropDownName.setPreferredSize(new Dimension(500,30));
         dropDownName.setBorder(border);
         DefaultStyledDocument currentContents = new DefaultStyledDocument();
 
         JTextPane dropDownContents = new JTextPane();
         dropDownContents.setBorder(border);
-
+        for(String line : contents.split("\n")){
+            if(line.startsWith("<html>")){
+                dropDownContents.setContentType("text/html");
+            }
+        }
         dropDownContents.setText(contents);
         dropDownContents.setEditable(false);
         for(String line : contents.split("\n")){
-            if(line.contains("http")){
+            if(line.startsWith("http")){
                 hasHyperlink = true;
                 hyperlink = line;
             }
