@@ -5,8 +5,8 @@ public class MasterFrame {
 
     public static JFrame masterFrame;
 
-    public static JPanel[] appPanels = {new StartingPanel(), new AppPanel(), new HomePanel(), new PersonalDataPanel()};
-    public static String[] appPanelsString = {"StartingPanel","ProductDataPanel","HomePanel","PersonalDataPanel"};
+    public static JPanel[] appPanels = {new StartingPanel(), new AppPanel(), new HomePanel(), new PersonalDataPanel(), new ShoppingPanel(), new AppPanel()};
+    public static String[] appPanelsString = {"StartingPanel","ProductDataPanel","HomePanel","PersonalDataPanel","ShoppingPanel","PaymentPanel"};
 
     public MasterFrame(JFrame masterFrame){
         this.masterFrame = masterFrame;

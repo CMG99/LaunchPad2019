@@ -20,7 +20,7 @@ public class StartingPanel extends AppPanel{
                                        "charger broken",
                                        "plastic bottle",
                                        "potato peel",
-                                       "jeans"};
+                                       "ripped jeans"};
 
     public StartingPanel(){
         setLayout(new BorderLayout());
@@ -151,7 +151,7 @@ public class StartingPanel extends AppPanel{
     private String[] getSearchResults(String currentSearchResult){
         ArrayList<String> returnList = new ArrayList<String>();
         for(String searchResult : searchResults){
-            if(searchResult.startsWith(currentSearchResult)){
+            if(searchResult.contains(currentSearchResult)){
                 returnList.add(searchResult);
             }
         }

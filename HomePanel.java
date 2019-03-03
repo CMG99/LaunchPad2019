@@ -31,8 +31,8 @@ public class HomePanel extends AppPanel{
         dropDownPanelMaster.setLayout(gridBag2);
         GridBagConstraints constraint2 = new GridBagConstraints();
 
-        changeConstraintPadding(constraint, 2,2 );
-        changeConstraintPadding(constraint2, 2,2 );
+        changeConstraintPadding(constraint, 0,2 );
+        changeConstraintPadding(constraint2, 0,2 );
 
         JPanel topPanel = new JPanel();
         topPanel.setPreferredSize(new Dimension(500,100));
@@ -57,13 +57,13 @@ public class HomePanel extends AppPanel{
         titleLabel.setFont(headingTextFont);
         topPanel.add(titleLabel,BorderLayout.CENTER);
 
-        JButton shopButton = new JButton(getImage("shoppingBasket.png"));
+        JButton shopButton = new JButton(getImage("shoppingCart.png"));
         shopButton.setPreferredSize(new Dimension(100,100 ));
         shopButton.setFont(textFont);
         shopButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MasterFrame.changePanel("StartingPanel");
+                MasterFrame.changePanel("ShoppingPanel");
                 SwingUtilities.updateComponentTreeUI(MasterFrame.masterFrame);
             }
         });
@@ -73,21 +73,19 @@ public class HomePanel extends AppPanel{
         addToPane(topPanel, constraint, gridBag, this);
 
         JPanel midPanel = new JPanel();
-        midPanel.setPreferredSize(new Dimension(500,150 ));
+        midPanel.setPreferredSize(new Dimension(500,60 ));
         GridBagLayout gridBag3 = new GridBagLayout();
         GridBagConstraints constraint3 = new GridBagConstraints();
         midPanel.setLayout(gridBag3);
 
         JLabel wtfLabel = new JLabel("WTF is this App?");
-        wtfLabel.setFont(headingTextFont);
+        wtfLabel.setFont(textFont);
         changeConstraintPadding(constraint3, 50, 0);
         changeConstraintPosition(constraint3, 0, 0);
         addToPane(wtfLabel, constraint3, gridBag3, midPanel);
 
-        JLabel descriptionLabel = new JLabel("<html><Recycling. The issue of out generation.<br>"+
-                "Join our effort to minimise waste in the four<br>"+
-                "following ways. Don't be lazy...</html>");
-        descriptionLabel.setFont(textFont);
+        JLabel descriptionLabel = new JLabel("<html><br><Recycling. The issue of out generation. Join our effort to minimise"
+                +"waste in the four following ways. Don't be lazy...</html>");
         changeConstraintPosition(constraint3, 0, 1);
         addToPane(descriptionLabel, constraint3, gridBag3, midPanel);
 
@@ -112,9 +110,9 @@ public class HomePanel extends AppPanel{
         changeConstraintPosition(constraint, 0, 2);
         addToPane(dropDownPanelMaster, constraint, gridBag, this);
 
-        JLabel image = new JLabel(getImage("SocialMedias.png"));
-        changeConstraintPosition(constraint, 0, 3);
-        addToPane(image, constraint, gridBag, this);
+//        JLabel image = new JLabel(getImage("SocialMedias.png"));
+//        changeConstraintPosition(constraint, 0, 3);
+//        addToPane(image, constraint, gridBag, this);
 
 
     }
@@ -127,8 +125,8 @@ public class HomePanel extends AppPanel{
         JLabel dropDownName = new JLabel(name);
         dropDownName.setBackground(appColour);
         dropDownName.setOpaque(true);
-        dropDownName.setFont(headingTextFont);
-        dropDownName.setPreferredSize(new Dimension(200,50));
+        dropDownName.setFont(textFont);
+        dropDownName.setPreferredSize(new Dimension(230,50));
         dropDownName.setBorder(border);
         changeConstraintPosition(constraint, 0, 0);
         addToPane(dropDownName, constraint, gridBag, dropDownPanel);
@@ -136,6 +134,8 @@ public class HomePanel extends AppPanel{
         JTextPane dropDownContents = new JTextPane();
         dropDownContents.setBorder(border);
         dropDownContents.setText(contents);
+        dropDownContents.setPreferredSize(new Dimension(250,200));
+        dropDownContents.setFont(new Font("Arial",Font.PLAIN,10));
         dropDownContents.setEditable(false);
         for(String line : contents.split("\n")){
             if(line.contains("http")){

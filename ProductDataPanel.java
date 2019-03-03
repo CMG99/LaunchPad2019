@@ -29,7 +29,7 @@ public class ProductDataPanel extends AppPanel {
                                                            "Fix",getContents("jeans.txt", "Fix")}};
     private Object[] currentDetails;
     private ArrayList<Boolean> dropDownStates = new ArrayList<>();
-    private String[] productDetailsString = {"tomato carton","charger broken","plastic bottle","potato peel","jeans"};
+    private String[] productDetailsString = {"tomato carton","charger broken","plastic bottle","potato peel","ripped jeans"};
     private JPanel dropDownPanelMaster = new JPanel();
     private boolean hasHyperlink = false;
     private String hyperlink;
@@ -120,11 +120,6 @@ public class ProductDataPanel extends AppPanel {
 
         JTextPane dropDownContents = new JTextPane();
         dropDownContents.setBorder(border);
-        for(String line : contents.split("\n")){
-            if(line.startsWith("<html>")){
-                dropDownContents.setContentType("text/html");
-            }
-        }
         dropDownContents.setText(contents);
         dropDownContents.setEditable(false);
         for(String line : contents.split("\n")){
@@ -134,6 +129,9 @@ public class ProductDataPanel extends AppPanel {
             }
         }
         if(hasHyperlink){
+            JLabel jamieOliver = new JLabel(getImage("JamieOliver.png"));
+            changeConstraintPosition(constraint, 0, 2);
+            addToPane(jamieOliver, constraint, gridBag, dropDownPanel);
             dropDownContents.addMouseListener(new MouseListener() {
                 @Override
                 public void mouseClicked(MouseEvent event) {
